@@ -6,6 +6,13 @@ const app = express();
 app.use(helmet.hidePoweredBy());
 
 
+// Sets "X-Frame-Options: DENY"
+app.use(
+  helmet.frameguard({
+    action: "deny",
+  })
+);
+
 
 
 
