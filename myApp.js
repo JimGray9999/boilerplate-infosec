@@ -30,10 +30,10 @@ app.use(helmet.dnsPrefetchControl());
 app.use(helmet.noCache());
 
 app.use(helmet.contentSecurityPolicy({
-  useDefaults: true,
     directives: {
-      "script-src": ["'self'", "trusted-cdn.com"],
-      "default-src": ['"self"']
+      "default-src": ["'self'"],
+      "script-src": ["'self'", 'trusted-cdn.com']
+      
     }
 }));
 
