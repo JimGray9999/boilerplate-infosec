@@ -4,38 +4,46 @@ const ninetyDaysInSeconds = 90*24*60*60;
 
 const app = express();
 
-app.use(helmet.hidePoweredBy());
+// app.use(helmet.hidePoweredBy());
 
 
-// Sets "X-Frame-Options: DENY"
-app.use(
-  helmet.frameguard({
+// // Sets "X-Frame-Options: DENY"
+// app.use(
+//   helmet.frameguard({
+//     action: "deny",
+//   })
+// );
+
+// // Sets "X-XSS-Protection: 0"
+// app.use(helmet.xssFilter());
+
+// app.use(helmet.noSniff());
+
+// app.use(helmet.ieNoOpen());
+
+// app.use(helmet.hsts({
+//   maxAge: ninetyDaysInSeconds, force: true
+// }));
+
+// app.use(helmet.dnsPrefetchControl());
+
+// app.use(helmet.noCache());
+
+app.use(helmet({
+  frameguard : {
     action: "deny",
-  })
-);
-
-// Sets "X-XSS-Protection: 0"
-app.use(helmet.xssFilter());
-
-app.use(helmet.noSniff());
-
-app.use(helmet.ieNoOpen());
-
-app.use(helmet.hsts({
-  maxAge: ninetyDaysInSeconds, force: true
-}));
-
-app.use(helmet.dnsPrefetchControl());
-
-app.use(helmet.noCache());
-
-app.use(helmet.contentSecurityPolicy({
+  },
+  contentSecurityPolicy: {
     directives: {
       "default-src": ["'self'"],
-      "script-src": ["'self'", 'trusted-cdn.com']
-      
+      "script-src": ["'self'", 'trusted-cdn.com']   
     }
+  },
+  dnsPrefetchControl: false
 }));
+  
+    
+
 
 
 
